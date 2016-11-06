@@ -30,6 +30,7 @@ Node* Reverse(Node* head){
   }
   return previous;
 }
+
 /*
 STACK OPERATIONS
 */
@@ -53,6 +54,7 @@ void DisplayStack(Node* stack){
     temp = temp->link;
   }  
 }
+
 
 int main(){
   int menu_choice;
