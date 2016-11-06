@@ -94,11 +94,35 @@ Node* PopFromQueue(Node* queue){
   }
 }
 
+/*
+DOUBLE ENDED QUEUE
+*/
+Node* PushToQueueFront(Node* queue,int value){
+  return PushToStack(queue,value);
+}
+
+Node* PopFromQueueBack(Node* queue){
+  if(!IsEmpty(queue)){
+    if(!queue->link){
+      queue = PopFromQueue(queue);
+      return queue;
+    }
+    else{
+      Node* temp = queue;
+      while(queue->link)
+	queue = queue->link;
+      cout<<"Popped element is : "<<queue->data;
+      queue->link = NULL;
+      return temp;
+    }
+  }
+}
+
 int main(){
   int menu_choice;
   Node* head = NULL;
   do{
-    cout<<"\n1.Insert 2.Display 3.Reverse 4.Make Stack 5.Make Queue";
+    cout<<"\n1.Insert 2.Display 3.Reverse 4.Make Stack 5.Make Queue 6.Make Double Ended Queue";
     cout<<"\nEnter the choice : ";
     cin>>menu_choice;
     switch(menu_choice){
@@ -174,6 +198,47 @@ int main(){
       }
       }	
       }while(choice);
+      break;
+    }
+    case 6:{
+      int choice;
+      Node* queue = NULL;
+       do{
+      cout<<"\nDOUBLE ENDED QUEUE OPERATIONS\n";
+      cout<<"~~~~~~~~~~~~~~~~~\n";
+      cout<<"1.Push(Back) 2.Push(Front) 3.Pop(Front) 4.Pop(Back) 5.Display\n";
+      cout<<"\nEnter the choice : ";
+      cin>>choice;
+      switch(choice){
+      case 1: {
+	int value;
+	cout<<"\nEnter the value : ";
+	cin>>value;
+	queue = PushToQueue(queue,value);
+	break;
+      }
+      case 2:{
+	int value;
+	cout<<"\nEnter the value : ";
+	cin>>value;
+	queue = PushToQueueFront(queue,value);
+	break;
+      }
+      case 3:{
+	queue = PopFromQueue(queue);
+	break;
+      }
+      case 4:{
+	queue = PopFromQueueBack(queue);
+	break;
+      }
+      case 5:{
+	Display(queue);
+	break;
+      }
+      }	
+      }while(choice);
+      break;
     }
     }
   }while(menu_choice);
