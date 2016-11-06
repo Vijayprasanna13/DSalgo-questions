@@ -55,12 +55,50 @@ void DisplayStack(Node* stack){
   }  
 }
 
+/*
+QUEUE OPERATIONS
+*/
+Node* PushToQueue(Node* queue,int value){
+  if(!queue){
+    Node* newnode = new Node;
+    newnode->data = value;
+    newnode->link = queue;
+    queue = newnode;
+    return queue;
+  }
+  else{
+    Node* newnode = new Node,*temp = queue;
+    while(queue->link)
+      queue = queue->link;
+    newnode->data = value;
+    queue->link = newnode;
+    newnode->link = NULL;
+    return temp;
+  }
+}
+
+void DisplayQueue(Node* queue){
+  if(!IsEmpty(queue))
+    while(queue){
+      cout<<queue->data<<" ";
+      queue = queue->link;
+    }
+  else
+    cout<<"\nNothing to diplay!";
+}
+
+Node* PopFromQueue(Node* queue){
+  if(!IsEmpty(queue)){
+  cout<<"Element popped is : "<<queue->data;
+  return queue->link;
+  }
+}
 
 int main(){
   int menu_choice;
   Node* head = NULL;
   do{
-    cout<<"\n1.Insert 2.Display 3.Reverse\n 4.Make Stack";
+    cout<<"\n1.Insert 2.Display 3.Reverse 4.Make Stack 5.Make Queue";
     cout<<"\nEnter the choice : ";
     cin>>menu_choice;
     switch(menu_choice){
@@ -108,6 +146,34 @@ int main(){
 	}
       }while(choice);
       break;
+    }
+    case 5:{
+      int choice;
+      Node* queue = NULL;
+      do{
+      cout<<"\nQUEUE OPERATIONS\n";
+      cout<<"~~~~~~~~~~~~~~~~~\n";
+      cout<<"1.Push 2.Display 3.Pop\n";
+      cout<<"\nEnter the choice : ";
+      cin>>choice;
+      switch(choice){
+      case 1: {
+	int value;
+	cout<<"\nEnter the value : ";
+	cin>>value;
+	queue = PushToQueue(queue,value);
+	break;
+      }
+      case 2:{
+	DisplayQueue(queue);
+	break;
+      }
+      case 3:{
+	queue = PopFromQueue(queue);
+	break;
+      }
+      }	
+      }while(choice);
     }
     }
   }while(menu_choice);
