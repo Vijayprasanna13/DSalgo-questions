@@ -108,11 +108,23 @@ Node* CreateMirror(Node* root){
   return temp;
 }
 
+Node* Delete(Node* root){
+  if(!root)
+    return NULL;
+  else  if(!root->left && !root->right)
+    return NULL;
+  else{
+    root->left = Delete(root->left);
+    root->right = Delete(root->right);
+    return root;
+  }
+}
+
 int main(){
   int menu_choice;
   Node* root = NULL,*temproot = NULL;
   do{
-    cout<<"\n1.Insert 2.Orders 3.Copy 4.Mirror";
+    cout<<"\n1.Insert 2.Orders 3.Copy 4.Mirror 6.somefunction";
     cout<<"\nEnter the choice : ";
     cin>>menu_choice;
     switch(menu_choice){
@@ -162,6 +174,11 @@ int main(){
       cout<<"\nEnter the value to be delete : ";
       cin>>value;
       root = DeleteValue(root,value);
+      break;
+    }
+    case 6:{
+      root = Delete(root);
+      break;
     }
     case 0:{
       break;
